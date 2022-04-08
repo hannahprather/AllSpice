@@ -1,13 +1,29 @@
+using System;
+using System.Collections.Generic;
+using AllSpice.Models;
 using AllSpice.Repositories;
 
 namespace AllSpice.Services
 {
-  public class RecipiesService
+  public class RecipesService
   {
-    private readonly RecipiesRepository _recipiesRepo;
-    public RecipiesService(RecipiesRepository recipiesRepo)
+    private readonly RecipesRepository _recipesRepo;
+
+    public RecipesService(RecipesRepository recipesRepo)
     {
-      _recipiesRepo = recipiesRepo;
+      _recipesRepo = recipesRepo;
+    }
+
+    internal List<Recipe> GetAll()
+    {
+      return _recipesRepo.GetAll();
+    }
+
+    internal Recipe Create(Recipe recipeData)
+    {
+      throw new NotImplementedException();
     }
   }
+
+
 }

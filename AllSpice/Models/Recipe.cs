@@ -6,11 +6,15 @@ namespace AllSpice.Models
     public string Title { get; set; }
     public string Subtitle { get; set; }
     public string Catigory { get; set; }
-    public string CreatorId { get; set; }
+    public string creatorId { get; set; }
     public string Photo { get; set; }
+    public Account? Creator { get; set; }
+  }
 
-
-
-    // public Account? Creator { get; set; }
+  public class RecipeViewModel : Recipe
+  {
+    public string? AccountId { get; set; }
+    // man not need this account id
+    public int? FavoriteId { get; set; }
   }
 }
