@@ -14,7 +14,7 @@ namespace AllSpice.Models
   public class RecipeViewModel : Recipe
   {
     public string? AccountId { get; set; }
-    // man not need this account id
+    // may not need this account id
     public int? FavoriteId { get; set; }
   }
 }
