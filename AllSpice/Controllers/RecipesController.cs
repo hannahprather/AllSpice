@@ -34,7 +34,35 @@ namespace AllSpice.Controllers
         return BadRequest(e.Message);
       }
     }
+    [HttpGet("{id}")]
+    public ActionResult<Recipe> GetById(int id)
+    {
+      try
+      {
+        Recipe recipe = _rs.GetById(id);
+        return Ok(recipe);
+      }
+      catch (Exception e)
+      {
 
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpGet("{id}/ingredients")]
+    public ActionResult<List<Ingredient>> GetIngredients(int id)
+    {
+      try
+      {
+        List<Ingredient> ingredient = _rs.GetIngredients(id);
+        return Ok(ingredient);
+      }
+      catch (Exception e)
+      {
+
+        return BadRequest(e.Message);
+      }
+    }
 
     [HttpPost]
     [Authorize]
@@ -50,6 +78,23 @@ namespace AllSpice.Controllers
       }
       catch (Exception e)
       {
+        return BadRequest(e.Message);
+      }
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<ActionResult<string>> Remove(int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        _rs.Remove(id, userInfo);
+        return Ok("delorted");
+      }
+      catch (Exception e)
+      {
+
         return BadRequest(e.Message);
       }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,13 +23,42 @@ namespace AllSpice.Repositories
       r.*
       a.*
       From recipes r
-      Join accounts a Where a.id = g.creatorId;
+      JOIN accounts a Where a.id = g.creatorId;
       ";
       return _db.Query<Recipe, Account, Recipe>(sql, (r, account) =>
       {
         r.Creator = account;
         return r;
       }).ToList();
+    }
+
+    internal Recipe GetById(int id)
+    {
+      string sql = @"
+      SELECT
+    r.*
+    a.*
+    FROM recipes r
+    JOIN accounts a ON r.creatorId = a.id
+    WHERE r.id = @id
+    ";
+      return _db.Query<Recipe, Account, Recipe>(sql, (r, a) =>
+      {
+        r.Creator = a;
+        return r;
+      }, new { id }).FirstOrDefault();
+    }
+
+    internal List<Ingredient> GetIngredients(int id)
+    {
+      string sql = @"
+      SELECT
+     i.*
+     
+      FROM ingredients i
+       WHERE i.recipeId = @id;
+      ";
+      return _db.Query<Ingredient>(sql, new { id }).ToList();
     }
 
     internal Recipe Create(Recipe recipeData)
@@ -46,7 +76,18 @@ namespace AllSpice.Repositories
     }
 
 
-
+    internal string Remove(int id)
+    {
+      string sql = @"
+  Delete FROM recipes WHERE id = @id LIMIT 1;
+  ";
+      int rowsAffected = _db.Execute(sql, new { id });
+      if (rowsAffected > 0)
+      {
+        return "delorted";
+      }
+      throw new Exception("this recipe could not be deleted");
+    }
 
   }
 

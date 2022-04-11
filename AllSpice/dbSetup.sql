@@ -17,3 +17,11 @@ CREATE TABLE IF NOT EXISTS recipes(
   picture TEXT NOT NULL COMMENT 'Recipe Picture',
   FOREIGN KEY (creatorId) REFERENCES accounts(id)
 ) default charset utf8 COMMENT '';
+CREATE TABLE IF NOT EXISTS ingredients(
+  id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'ingredient id',
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  recipId INT Not NULL,
+  name varchar(255),
+  quantity TEXT NOT Null,
+)
