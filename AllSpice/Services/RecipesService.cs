@@ -24,7 +24,7 @@ namespace AllSpice.Services
       Recipe found = _recipesRepo.GetById(id);
       if (found == null)
       {
-        throw new Exception("invaild Id");
+        throw new Exception("invaild Id pal");
       }
       return found;
     }
