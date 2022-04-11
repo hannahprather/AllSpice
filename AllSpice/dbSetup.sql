@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS ingredients(
   id INT NOT NULL AUTO_INCREMENT primary key COMMENT 'ingredient id',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
-  recipId INT Not NULL,
+  recipeId INT Not NULL,
   name varchar(255),
   quantity TEXT NOT Null,
   FOREIGN KEY(recipeId) REFERENCES recipes(id)
