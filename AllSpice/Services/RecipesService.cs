@@ -38,6 +38,20 @@ namespace AllSpice.Services
       throw new NotImplementedException();
     }
 
+    internal Recipe Edit(Recipe updates, Account userInfo)
+    {
+      Recipe origional = GetById(updates.Id);
+      if (origional.creatorId != userInfo.Id)
+      {
+        throw new Exception("this isnt your recipe yo!");
+      }
+      origional.Title = updates.Title ?? origional.Title;
+      origional.Subtitle = updates.Subtitle ?? origional.Subtitle;
+      origional.Category = updates.Category ?? origional.Category;
+      _recipesRepo.Edit(origional);
+      return origional;
+    }
+
 
     internal string Remove(int id, Account userInfo)
     {
