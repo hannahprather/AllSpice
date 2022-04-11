@@ -5,7 +5,7 @@ namespace AllSpice.Models
     public int? Id { get; set; }
     public string Title { get; set; }
     public string Subtitle { get; set; }
-    public string Catigory { get; set; }
+    public string Category { get; set; }
     public string creatorId { get; set; }
     public string Photo { get; set; }
     public Account? Creator { get; set; }

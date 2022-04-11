@@ -64,6 +64,8 @@ namespace AllSpice.Controllers
       }
     }
 
+
+
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Recipe>> Create([FromBody] Recipe recipeData)
@@ -81,6 +83,25 @@ namespace AllSpice.Controllers
         return BadRequest(e.Message);
       }
     }
+
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Recipe>> Edit([FromBody] Recipe updates, int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        updates.Id = id;
+        Recipe updated = _rs.Edit(updates, userInfo);
+        return Ok(updated);
+      }
+      catch (Exception e)
+      {
+
+        return BadRequest(e.Message);
+      }
+    }
+
 
     [HttpDelete("{id}")]
     [Authorize]

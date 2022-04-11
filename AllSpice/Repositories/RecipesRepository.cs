@@ -75,6 +75,19 @@ namespace AllSpice.Repositories
       return recipeData;
     }
 
+    internal void Edit(Recipe origional)
+    {
+      string sql = @"
+      UPDATE recipes
+      SET
+       title = @Title,
+       subtitle = @Subtitle,
+       category = @Category,
+       picture = @Picture
+      WHERE id = @Id;";
+      _db.Execute(sql, origional);
+    }
+
 
     internal string Remove(int id)
     {
