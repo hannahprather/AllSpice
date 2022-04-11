@@ -35,6 +35,7 @@ namespace AllSpice.Controllers
       }
     }
 
+
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Recipe>> Create([FromBody] Recipe recipeData)

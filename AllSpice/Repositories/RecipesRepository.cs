@@ -24,11 +24,32 @@ namespace AllSpice.Repositories
       From recipes r
       Join accounts a Where a.id = g.creatorId;
       ";
-      return _db.Query<Recipe, Account, Recipe>(sql, (recipe, account) =>
+      return _db.Query<Recipe, Account, Recipe>(sql, (r, account) =>
       {
-        recipe.Creator = account;
-        return recipe;
+        r.Creator = account;
+        return r;
       }).ToList();
     }
+
+    internal Recipe Create(Recipe recipeData)
+    {
+      string sql = @"
+    INSERT INTO recipes
+    (title,subtitle,category,creatorId,picture)
+    VALUE
+    (@Title,@Subtitle,@Category,@CreatorId,@Picture);
+    SELECT LAST_INSERT_ID();
+    ";
+      int id = _db.ExecuteScalar<int>(sql, recipeData);
+      recipeData.Id = id;
+      return recipeData;
+    }
+
+
+
+
   }
+
+
+
 }
